@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# define directory for screenshots
+DIR="$HOME/scrshots/$(date +'%Y-%m')"
+mkdir -p "$DIR"
+
+# generate filename with timestamp
+FILENAME="$DIR/$(date +'%Y-%m-%d_%H-%M-%S').png"
+
+# notify user to select area for screenshot
+notify-send -t 1000 "select area for screenshot..." -u low
+
+# take screenshot of selected area and save to clipboard and file
+if maim -s -u "$FILENAME"; then
+    # save to clipboard
+    xclip -selection clipboard -t image/png < "$FILENAME"
+    notify-send -t 1000 "screenshot saved: $FILENAME ( and copied to clipboard)" -u low
+    break
+else
+    notify-send -t 1000 "error: screenshot could not be saved" -u critical
+    break
+fi

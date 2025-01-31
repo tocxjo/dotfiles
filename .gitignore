@@ -1,0 +1,5 @@
+.gitsecret/keys/random_seed
+!*.secret
+.config/emacs
+.config/kdeconnect
+wp/

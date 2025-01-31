@@ -1,0 +1,3 @@
+#!/bin/sh
+
+curl -s "wttr.in/buenos+aires?format=%t"

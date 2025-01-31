@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# define directories
+screenshot_dir="$HOME/scrshots/$(date +'%Y-%m')"
+mkdir -p "$screenshot_dir"
+
+# generate filename
+filename="$screenshot_dir/$(date +'%d-%H-%M-%S').gif"
+tmp_dir=$(mktemp -d)
+
+# notify user that recording is about to start
+notify-send "selecciona el área para grabar el gif" -u low
+
+# take initial screenshot to select area
+maim -s "$tmp_dir/initial.png"
+
+# get the geometry of the selected area
+geometry=$(identify -format "%wx%h%+x%+y" "$tmp_dir/initial.png")
+
+# notify user that recording has started
+notify-send "grabación de gif iniciada. presiona esc para abortar o ctrl+shift+print para detener." -u low
+
+# function to stop recording
+stop_recording() {
+    pkill -P $$
+    convert -delay 10 -loop 0 "$tmp_dir/screenshot-*.png" "$filename"
+    rm -r "$tmp_dir"
+    notify-send "grabación de gif detenida. gif guardado: $filename" -u low
+    exit 0
+}
+
+# function to handle keyboard events
+handle_keys() {
+    while :; do
+        read -rsn1 key
+        if [[ $key == $'\e' ]]; then
+            # if esc key is pressed, abort recording
+            pkill -P $$
+            rm -r "$tmp_dir"
+            notify-send "grabación de gif abortada." -u low
+            exit 0
+        fi
+    done
+}
+
+# start the keyboard event handler in the background
+handle_keys &
+
+# start recording screenshots in a loop
+while :; do
+    maim -g $geometry "$tmp_dir/screenshot-$(date +'%s').png"
+    sleep 0.1
+done
+
+# bind the stopping combination to stop the recording
+bindsym --release --whole-window --no-startup-id ctrl+shift+print exec --no-startup-id "$0 stop"

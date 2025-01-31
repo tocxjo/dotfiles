@@ -1,0 +1,28 @@
+#!/bin/sh
+
+file="$1"
+width="$2"
+height="$3"
+
+# Vista previa de imágenes con ueberzug
+if file --mime-type "$file" | grep -q 'image/'; then
+    ueberzug layer --parser bash 0 <<EOF
+{
+    "action": "add",
+    "identifier": "lf-preview",
+    "x": 0,
+    "y": 0,
+    "width": "$width",
+    "height": "$height",
+    "path": "$file"
+}
+EOF
+    exit 0
+fi
+
+if file --mime-type "$file" | grep -q 'text/'; then
+    bat --color=always --style=numbers --line-range=:500 "$file"
+    exit 0
+fi
+
+pistol "$file"

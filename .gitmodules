@@ -1,0 +1,11 @@
+[submodule "BeOS-r5-Icons"]
+    path = .icons/BeOS-r5-Icons
+    url  = https://gitlab.com/metsatron/BeOS-r5-Icons
+
+[submodule "BeOS-r5-GTK"]
+    path = .icons/BeOS-r5-GTK
+    url  = https://gitlab.com/metsatron/BeOS-r5-GTK
+
+[submodule "BeOS-r5-XFWM"]
+    path = .icons/BeOS-r5-XFWM
+    url  = https://gitlab.com/metsatron/BeOS-r5-XFWM

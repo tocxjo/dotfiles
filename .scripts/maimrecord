@@ -1,0 +1,24 @@
+#!/bin/bash
+
+SCRSHOTS_DIR="$HOME/scrshots/$(date +'%Y-%m')"
+FILENAME="$SCRSHOTS_DIR/$(date +'%Y-%m-%d_%H-%M-%S').mp4"
+
+# check if ffmpeg is already running
+if pgrep -x "ffmpeg" > /dev/null
+then
+    # if ffmpeg is running, stop it
+    pkill -x ffmpeg
+else
+    # if it's not running, start recording
+    mkdir -p "$SCRSHOTS_DIR"
+    notify-send -t 1000 "recording started" "press shift + prntscr to stop recording."
+
+    SINK_INPUT_ID=$(pactl list sink-inputs | grep -B 20 "Name: .*AB13X Headset Adapter" | grep 'Sink Input #' | awk '{print $3}')
+
+    ffmpeg -video_size 1600x900 -framerate 60 -f x11grab -i :0.0 \
+           -f pulse -i "input-${SINK_INPUT_ID}.monitor" \
+           -c:v libx264 -preset fast -b:v 2M -crf 22 -pix_fmt yuv420p \
+           -c:a aac -strict -2 "$FILENAME"
+
+        notify-send -t 1000 "recording stopped" "video saved: $FILENAME"
+fi

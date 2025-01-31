@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# directory stuff
+DIR=~/scrshots/$(date +'%Y-%m')
+mkdir -p $DIR
+
+# generate filename with timestamp
+FILENAME=$DIR/$(date +'%Y-%m-%d_%H-%M-%S').png
+
+# take the screenshot and copy to clipboard
+maim | xclip -selection clipboard -t image/png
+# save the screenshot in the screenshots folder
+maim $FILENAME
+notify-send -t 1000 "screenshot taken successfully" "screenshot saved: $FILENAME"
