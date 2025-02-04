@@ -53,6 +53,11 @@
     </property>
     <property name="plugin-6" type="string" value="systray">
       <property name="known-legacy-items" type="array">
+        <value type="string" value="qbittorrent"/>
+        <value type="string" value="wi-fi network connection “telecentro-52c6” active: telecentro-52c6 (81%)"/>
+        <value type="string" value="wi-fi network connection “telecentro-52c6” active: telecentro-52c6 (82%)"/>
+        <value type="string" value="wi-fi network connection “telecentro-52c6” active: telecentro-52c6 (99%)"/>
+        <value type="string" value="no network connection"/>
         <value type="string" value="networkmanager applet"/>
         <value type="string" value="wi-fi network connection “telecentro-52c6” active: telecentro-52c6 (100%)"/>
         <value type="string" value="wi-fi network connection “telecentro-52c6” active: telecentro-52c6 (77%)"/>
@@ -69,10 +74,15 @@
         <value type="string" value="Fcitx"/>
       </property>
       <property name="hidden-legacy-items" type="array">
+        <value type="string" value="wi-fi network connection “telecentro-52c6” active: telecentro-52c6 (99%)"/>
+        <value type="string" value="wi-fi network connection “telecentro-52c6” active: telecentro-52c6 (81%)"/>
         <value type="string" value="networkmanager applet"/>
-        <value type="string" value="wi-fi network connection “telecentro-52c6” active: telecentro-52c6 (77%)"/>
-        <value type="string" value="fcitx5 tray window"/>
+        <value type="string" value="no network connection"/>
         <value type="string" value="wi-fi network connection “telecentro-52c6” active: telecentro-52c6 (100%)"/>
+        <value type="string" value="fcitx5 tray window"/>
+        <value type="string" value="wi-fi network connection “telecentro-52c6” active: telecentro-52c6 (77%)"/>
+        <value type="string" value="qbittorrent"/>
+        <value type="string" value="wi-fi network connection “telecentro-52c6” active: telecentro-52c6 (82%)"/>
       </property>
       <property name="symbolic-icons" type="bool" value="false"/>
       <property name="menu-is-primary" type="bool" value="false"/>
